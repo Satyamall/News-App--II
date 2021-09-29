@@ -35,7 +35,7 @@
 
         function getMovie(movie) {
             
-            return fetch(`http://www.omdbapi.com/?i=tt3896198&apikey=42e91e0f`)
+            return fetch(`http://www.omdbapi.com/?t=${movie}&apikey=42e91e0f`)
                 .then(function (response) {
                     console.log(response);
                     return response.json();
