@@ -9,8 +9,25 @@
     <style>
         #container{
             width: 500px;
-            margin: auto;
-            border: 2px solid red;
+            margin:20px auto;
+            /* border: 2px solid red; */
+            background-color: black;
+            color: white;
+        }
+        body{
+            background-color: aqua;
+        }
+        #movie{
+            width: 50%;
+            height: 40px;
+            border-radius: 40px;
+            font-size: large;
+        }
+        #search{
+            width: 40%;
+            height: 40px;
+            border-radius: 40px;
+            font-size: x-large;
             background-color: black;
             color: white;
         }
@@ -18,7 +35,7 @@
 </head>
 
 <body>
-    <input type="text" id="movie" placeholder="Movie">
+    <input type="text" id="movie" placeholder="🔍 Movie Name Type Here">
     <button id="search">Search</button>
     <div id="container">
 
@@ -52,6 +69,7 @@
                 .then(function (response) {
                     console.log(response)
                     const container = document.getElementById("container");
+                    container.style.border = "2px solid red";
 
                     container.innerHTML = "";
                     var f=0;
@@ -62,15 +80,19 @@
                             title.textContent = data.Title;
                             const poster = document.createElement("img");
                             poster.src = data.Poster;
-                            poster.style.width=100+"%"
+                            poster.style.width=100+"%";
                             const releaseDate = document.createElement('p');
                             releaseDate.textContent = "Released Data: "+data.Released;
                             const ratings = document.createElement('div');
                             if(data.imdbRating>8.5)
                             {
                                 const rating = document.createElement("p");
+                                rating.style.float = "left";
                                 rating.textContent = "IMBD Rating: "+data.imdbRating;
                                 const rec= document.createElement("img");
+                                rec.style.width = 100 +"px";
+                                rec.style.height = 30 + "px";
+                                rec.style.marginLeft=100 + "px";
                                 rec.src = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRcM73HcOz5DYx9I_cydHLxb2TQtWZRwU2gbQ&usqp=CAU";
                                 ratings.append(rating,rec);
                             }
@@ -84,6 +106,7 @@
                             actors.textContent = "Actors: "+ data.Actors;
                             const genre = document.createElement("p");
                             genre.textContent = "Genre: "+ data.Genre;
+
 
                             container.append(poster,releaseDate,title,ratings,language,actors,genre);
                             f=1;
