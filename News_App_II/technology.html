@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>News App of Technology</title>
+    <style>
+        .card-container{
+            padding: 0.5rem;
+            border: 1px solid black;
+            display: flex;
+            margin-bottom: 1rem;
+        }
+        #navbar{
+            width: 100%;
+            height: 50px;
+            border: 1px solid black;
+            padding-top: 20px;
+            margin-bottom: 20px;
+        }
+        #navbar>a{
+            margin-left: 20px;
+            text-decoration: none;
+            border: 1px solid red;
+            font-size: large;
+            padding: 10px;
+            border-radius: 20px;
+            background-color: black;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <nav id="navbar">
+        <a href="NewsApp-II.html">Home</a>
+        <a href="sports.html">Sports</a>
+        <a href="entertainment.html">Entertainment</a>
+        <a href="technology.html">Technology</a>
+    </nav>
+    
+    <div id="container">
+
+    </div>
+ 
+    <script>
+
+        fetch("https://newsapi.org/v2/everything?q=technology&from=2021-09-02&sortBy=publishedAt&apiKey=c8a782538e2a40f7b677827c183dd0bc")
+        .then(function(response){
+            console.log(response);
+            return response.json()
+        })
+        .then(function(response){
+            console.log(response);
+            showHeadline(response.articles)
+        })
+        .catch(function(err){
+
+        })
+
+        function showHeadline(data){
+            const container = document.getElementById("container");
+            container.textContent = "";
+            const div = document.createElement('div');
+            for(var i=0; i<10; i++){
+                const card = createCard(data[i]);
+                div.append(card);
+            }
+            container.append(div);
+        }
+        
+        var count=1;
+        function createCard(content){
+            const div = document.createElement("div");
+            div.className ="card-container";
+
+            const h4 = document.createElement("h4");
+            h4.textContent =`${count} - ${content.content}`;
+            count++;
+            div.append(h4)
+            return div
+        }
+    </script>
+
+</body>
+</html>
